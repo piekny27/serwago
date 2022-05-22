@@ -28,25 +28,8 @@ class DBConnection(metaclass=Singleton):
     def fetchUsers(self):
         return self.session.query(User).all()
     
-    def fetchRooms(self):
-        return self.session.query(Room).all()
-
-    def getRoom(self, name):
-        return self.session.query(Room).filter(Room.name == name).first()
-    
     def getUser(self, name):
         return self.session.query(User).filter(User.username == name).first()
-
-    def getRoomsForUser(self, id):
-        access = self.session.query(Access).filter(Access.userid == id).all()
-        ids = [acc.roomid for acc in access]
-        return self.session.query(Room).filter(Room.id.in_(ids)).all()
-
-    def getMeasurementsForRoom(self, id):
-        return self.session.query(Measurement).filter(Measurement.roomid == id).order_by(Measurement.timestamp).all()
-    
-    def getLastMeasurementForRoom(self, id):
-        return self.session.query(Measurement).filter(Measurement.roomid == id).order_by(Measurement.timestamp).first()
 
     def getRoleName(self, id):
         return self.session.query(UserRole).filter(UserRole.id == id).first().name
@@ -54,18 +37,6 @@ class DBConnection(metaclass=Singleton):
     def addUser(self, user):
         self._engine.session.add(user)
     
-    def addRoom(self, room):
-        self._engine.session.add(room)
-
-    def grantAccess(self, user, room):
-        self._engine.session.add(Access(userid = self.getUser(user).id, roomid = self.getRoom(room).id))
-
-class Room(db.Model):
-    __tablename__ = "rooms"
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(10), unique=True, nullable=False)
-    description = db.Column(db.String(100))
-
 class UserRole(db.Model):
     BASIC = "BASIC"
     ADMIN = "ADMIN"
@@ -98,20 +69,22 @@ class User(db.Model, UserMixin):
     def role(self):
         return DBConnection().getRoleName(self.role_id)
 
-class Access(db.Model):
-    __tablename__ = "accesses"
-    id = db.Column(db.Integer, primary_key = True)
-    userid = db.Column(db.Integer, db.ForeignKey("users.id", ondelete='CASCADE'), nullable = False)
-    user = db.relationship('User', backref=db.backref('accesses', cascade="all, delete"))
-    roomid = db.Column(db.Integer, db.ForeignKey("rooms.id", ondelete='CASCADE'), nullable = False)
-    room = db.relationship('Room', backref=db.backref('accesses', cascade="all, delete"))
-    __table_args__ = (db.UniqueConstraint('userid', 'roomid', name='room_user_uc'),)
+class Koszyk (db.Model):
+    _tablename_="koszyk"
+    id = db.Column(db.Integer, nullable=False, primary_key= True)
+    id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
+    id_user = db.Column(db.Integer, db.ForeignKey("users.id"))
 
-class Measurement(db.Model):
-    __tablename__ = "measurements"
-    id = db.Column(db.Integer, primary_key = True)
-    roomid = db.Column(db.Integer, db.ForeignKey("rooms.id", ondelete='CASCADE'))
-    room = db.relationship('Room', backref=db.backref('measurements', cascade="all, delete"))
-    temperature = db.Column(db.Integer)
-    humidity = db.Column(db.Float)
-    timestamp = db.Column(db.DateTime)
+class Towar(db.Model):
+    _tablename_="towar"
+    id = db.Column(db.Integer, primary_key= True)
+    nazwa=db.Column(db.String(50), nullable = False, unique = True)
+    id_rodzaj=db.Column(db.Integer, db.ForeignKey("rodzaj.id"), nullable=False)
+    ilosc=db.Column(db.Integer)
+    
+    
+class Rodzaj(db.Model):
+    _tablename_="rodzaj"
+    id = db.Column(db.Integer, primary_key= True)
+    nazwa = db.Column(db.String(50), nullable = False, unique = True)
+    
