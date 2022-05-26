@@ -7,10 +7,9 @@ from serwago.forms import LoginForm, RegisterForm
 db = DBConnection()
 
 
-@app.route("/")
 @app.route("/welcome")
-def base_page():
-    return render_template("base.html")
+def welcome_page():
+    return render_template("welcome.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login_page():
@@ -21,14 +20,14 @@ def login_page():
             user = User.query.filter_by(email=form.username.data).first()
         if user and user.check_password_correction(attempted_password = form.password.data):
             login_user(user)
-            return redirect(url_for('welcome.html'))
+            return redirect(url_for('welcome_page'))
     return render_template("login.html", form=form)
     
     
 @app.route("/register", methods=['GET', 'POST'])
 def register_page():
     if(current_user.is_authenticated):
-        return redirect(url_for('welcome.html'))
+        return redirect(url_for('welcome_page'))
     form = RegisterForm()
     if form.validate_on_submit():
         new_profile = UserProfile()
@@ -41,13 +40,13 @@ def register_page():
         db.session.add(new_user)
         db.session.commit()     
         login_user(new_user)                            
-        return redirect(url_for('welcome.html'))
+        return redirect(url_for('welcome_page'))
     return render_template("register.html", form=form)    
 
 @app.route("/logout")
 def logout_page():
     logout_user()
-    return render_template("home.html")    
+    return render_template("welcome.html")    
 
 @app.route("/account")
 def account_page():
@@ -61,11 +60,6 @@ def aboutus_page():
 @app.route("/products")
 def products_page():
     return render_template("products.html")    
-    
-    
-@app.route("/welcome")
-def welcome_page():
-    return render_template("welcome.html")
 
 @app.route("/reset_pwd")
 def resetpwd_page():
