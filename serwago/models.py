@@ -45,7 +45,6 @@ class UserRole(db.Model):
     name = db.Column(db.String(50), unique=True)
     user = db.relationship('User', backref=db.backref('users'))
 
-
 class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key = True)
@@ -54,8 +53,18 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(60), nullable = False)
     active = db.Column(db.Boolean(), nullable = False, default = True)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
-    phonenumber=db.Column(db.Integer)
+    profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"),nullable=False)
 
+class UserProfile(db.Model):
+    __tablename__ = "profiles"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    first_name = db.Column(db.String(30))
+    last_name = db.Column(db.String(30))
+    gender = db.Column(db.String(6))
+    nationality = db.Column(db.String(30))
+    avatarName = db.Column(db.String(30))
+    user=db.relationship('User', backref=db.backref("profiles"))
+    
     @property
     def password(self):
         return self.password_hash
@@ -71,13 +80,13 @@ class User(db.Model, UserMixin):
         return DBConnection().getRoleName(self.role_id)
 
 class Koszyk (db.Model):
-    _tablename_="koszyk"
+    __tablename__="koszyk"
     id = db.Column(db.Integer, nullable=False, primary_key= True)
     id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
     id_user = db.Column(db.Integer, db.ForeignKey("users.id"))
 
 class Towar(db.Model):
-    _tablename_="towar"
+    __tablename__="towar"
     id = db.Column(db.Integer, primary_key= True)
     nazwa=db.Column(db.String(50), nullable = False, unique = True)
     id_rodzaj=db.Column(db.Integer, db.ForeignKey("rodzaj.id"), nullable=False)
@@ -86,16 +95,16 @@ class Towar(db.Model):
     
     
 class Rodzaj(db.Model):
-    _tablename_="rodzaj"
+    __tablename__="rodzaj"
     id = db.Column(db.Integer, primary_key= True)
     nazwa = db.Column(db.String(50), nullable = False, unique = True)
 
 
 class CPU (db.Model):
-    _tablename_="cpu"
+    __tablename__="cpu"
     id= db.Column(db.Integer, primary_key= True)
     id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
-    model= db.Column(db.String(50), nullable = False, unique = True)
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
     rdzenie=db.Column(db.Integer)
     watki=db.Column(db.Integer)
     id_architektura=db.Column(db.Integer, db.ForeignKey("architektura.id"))
@@ -108,31 +117,41 @@ class CPU (db.Model):
 
 
 class Producent (db.Model):
-    _tablename_='producent'
+    __tablename__='producent'
     id=db.Column(db.Integer, primary_key=True)
     producent=db.Column(db.String(20), nullable = False, unique = True)
 
 class Architektura (db.Model):
-    _tablename_='architektura'
+    __tablename__='architektura'
     id=db.Column(db.Integer, primary_key=True)
     architektura=db.Column(db.String(30), nullable = False, unique = True)
 
 class Socket (db.Model):
-    _tablename_='socket'
+    __tablename__='socket'
     id=db.Column(db.Integer, primary_key=True)
     socket=db.Column(db.String(10), nullable = False, unique = True)
+
+class Laczeniekart(db.Model):
+    __tablename__='laczeniekart'
+    id=db.Column(db.Integer, primary_key=True)
+    laczeniekart=db.Column(db.String(12), unique=True)
+    maxilosckart=db.Column(db.Integer)
     
+class Pamiectyp(db.Model):
+    __tablename__="pamiectyp"
+    id=db.Column(db.Integer, primary_key=True)
+    pamiectyp=db.Column(db.String(8), unique=True)
 
 
 
 
 class GPU(db.Model):
-    _tablename_="gpu"
+    __tablename__="gpu"
     id= db.Column(db.Integer, primary_key= True)
-    model= db.Column(db.String(60), nullable = False, unique = True)
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
     id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
     pamiecilosc=db.Column(db.Integer)
-    pamiectyp=db.Column(db.String(8))
+    pamiectyp=db.Column(db.Integer, db.ForeignKey("pamiectyp.id"))
     rdzenietakt=db.Column(db.Integer)
     rdzenietaktturbo=db.Column(db.Integer)
     pamiecietakt=db.Column(db.Integer)
@@ -146,7 +165,7 @@ class GPU(db.Model):
     zlaczaHDMI=db.Column(db.Integer)
     zlaczaDP=db.Column(db.Integer)
     tdp=db.Column(db.Integer)
-    laczeniekart=db.Column(db.Boolean)
+    id_laczeniekart=db.Column(db.Integer, db.ForeignKey("laczeniekart.id"))
 
 
 

@@ -15,6 +15,7 @@ class DBGenerator():
         self.db._engine.create_all()
 
     def genDB(self):
+        self.genUserProfiles()
         self.genUserRoles()
         self.genUsers()
         self.genRodzaje()
@@ -24,6 +25,7 @@ class DBGenerator():
         self.genProducent()
         self.genArchitektura()
         self.genSocket()
+        self.genLaczeniekart()
         
 
     def genUserRoles(self):
@@ -33,15 +35,30 @@ class DBGenerator():
 
 
     def genUsers(self):
-        usernames = ["Bartek", "Ola", "Karolina", "Kasia", "Natalia", "Krzysztof", "Jan"]
-        admin = User(username="Kacper", email="Kacper@gmail.com", password_hash=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)), role_id = 2, phonenumber=random.randint(500000000, 999999999))
+        usernames = ["Bartek", "Ola", "Karolina", "Kasia", "Natalia", "Krzysztof", "Jan", "Aleksander", "Mateusz", "Piotr"]
+        admin = User(username="Kacper", email="Kacper@gmail.com", password_hash=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)), role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
         self.users.append(admin)
+        inc=0
         for user in usernames:
-            user = User(username=user, email=user+"@gmail.com", password_hash=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)), role_id = 1, phonenumber=random.randint(500000000, 999999999))
+            user = User(username=user, email=user+"@gmail.com", password_hash=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)), role_id = 1, profile_id=random.randint(1,10))
             self.users.append(user)
             self.db.addUser(user)
+            inc+=1
         self.db.flush()
+
+    def genUserProfiles(self):
+        for x in range(10):
+            self.db.session.add(UserProfile(first_name="Mateusz", last_name="Kowalski", gender="Male"))
+            self.db.session.commit()
+
+
+
+       
+
+
+
+    
 
     def genRodzaje(self):
         rodzaje = ["Układy scalone", "Słuchawki", "Karty graficzne", "Procesory", "Klawiatury", "Obudowy", "Myszki"]
@@ -51,7 +68,7 @@ class DBGenerator():
 
     def genTowary(self):
         inc = 0
-        towary = ["Arduino Nano", "Steelseries Arctis 5", "RTX 3090 Ti", "Intel Core i7-12900K", "Steelseries Apex 7", "Zalman Z-Machine 500 ARGB", "Razer Mamba Elite"]
+        towary = ["Arduino Nano", "Steelseries Arctis 5", "RTX 3090 Ti", "Core i5-10400", "Steelseries Apex 7", "Zalman Z-Machine 500 ARGB", "Razer Mamba Elite", "Ryzen 1700"]
         for towar in towary:
             self.db.session.add(Towar(nazwa=towar, id_rodzaj = inc, ilosc=random.randint(0, 1000), id_producent=random.randint(1,6)))
             self.db.session.commit()
@@ -66,6 +83,16 @@ class DBGenerator():
                 num4 = random.randint(1, 8)
                 self.db.session.add(Koszyk(id_towar=num3, id_user = num4 ))
                 self.db.session.commit()
+
+    def genLaczeniekart(self):
+        inc = 0
+        laczeniekart=["SLI", "CrossFireX", "Brak"]
+       
+        
+        for laczeniekart in laczeniekart:
+            self.db.session.add(Laczeniekart(laczeniekart=laczeniekart, maxilosckart=random.randint(0,4)))
+            self.db.session.commit()
+            inc+=1
 
 
     def genProducent(self):
@@ -96,8 +123,8 @@ class DBGenerator():
 
 
     def genCPU(self):
-     self.db.session.add(CPU(id_producent=1, model="Core i5-10400", rdzenie=8, watki=8, id_architektura=6, zegarbase=2.9, zegarmax=4.3, iGPU=0, tdp=65, cache="12 MB", id_socket=4))
-     self.db.session.add(CPU(id_producent=3, model="Ryzen 1700", rdzenie=8, watki=16, id_architektura=8, zegarbase=3.0, zegarmax=3.7, iGPU=0, tdp=65, cache="16 MB", id_socket=6))   
+     self.db.session.add(CPU(id_producent=1, model=4, rdzenie=8, watki=8, id_architektura=6, zegarbase=2.9, zegarmax=4.3, iGPU=0, tdp=65, cache="12 MB", id_socket=4))
+     self.db.session.add(CPU(id_producent=3, model=8, rdzenie=8, watki=16, id_architektura=8, zegarbase=3.0, zegarmax=3.7, iGPU=0, tdp=65, cache="16 MB", id_socket=6))   
      self.db.session.commit()  
 
 if __name__ == "__main__":
