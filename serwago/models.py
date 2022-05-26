@@ -54,6 +54,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(60), nullable = False)
     active = db.Column(db.Boolean(), nullable = False, default = True)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
+    phonenumber=db.Column(db.Integer)
 
     @property
     def password(self):
@@ -81,6 +82,7 @@ class Towar(db.Model):
     nazwa=db.Column(db.String(50), nullable = False, unique = True)
     id_rodzaj=db.Column(db.Integer, db.ForeignKey("rodzaj.id"), nullable=False)
     ilosc=db.Column(db.Integer)
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"), nullable=False)
     
     
 class Rodzaj(db.Model):
@@ -92,33 +94,50 @@ class Rodzaj(db.Model):
 class CPU (db.Model):
     _tablename_="cpu"
     id= db.Column(db.Integer, primary_key= True)
-    producent=db.Column(db.String(20))
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
     model= db.Column(db.String(50), nullable = False, unique = True)
     rdzenie=db.Column(db.Integer)
     watki=db.Column(db.Integer)
-    architektura=db.Column(db.String(50), nullable = False)
+    id_architektura=db.Column(db.Integer, db.ForeignKey("architektura.id"))
     zegarbase=db.Column(db.Integer)
     zegarmax=db.Column(db.Integer)
     iGPU=db.Column(db.Boolean())
     tdp=db.Column(db.Integer)
     cache=db.Column(db.String(8))
-    socket=db.Column(db.String(15))
+    id_socket=db.Column(db.Integer, db.ForeignKey("socket.id"))
+
+
+class Producent (db.Model):
+    _tablename_='producent'
+    id=db.Column(db.Integer, primary_key=True)
+    producent=db.Column(db.String(20), nullable = False, unique = True)
+
+class Architektura (db.Model):
+    _tablename_='architektura'
+    id=db.Column(db.Integer, primary_key=True)
+    architektura=db.Column(db.String(30), nullable = False, unique = True)
+
+class Socket (db.Model):
+    _tablename_='socket'
+    id=db.Column(db.Integer, primary_key=True)
+    socket=db.Column(db.String(10), nullable = False, unique = True)
+    
 
 
 
 
-class GPUNVIDIA(db.Model):
-    _tablename_="gpuNVIDIA"
+class GPU(db.Model):
+    _tablename_="gpu"
     id= db.Column(db.Integer, primary_key= True)
     model= db.Column(db.String(60), nullable = False, unique = True)
-    producent=db.Column(db.String(20))
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
     pamiecilosc=db.Column(db.Integer)
     pamiectyp=db.Column(db.String(8))
     rdzenietakt=db.Column(db.Integer)
     rdzenietaktturbo=db.Column(db.Integer)
     pamiecietakt=db.Column(db.Integer)
-    cuda=db.column(db.Integer)
-    rdzeniert=db.column(db.Integer)
+    cuda=db.Column(db.Integer)
+    rdzeniert=db.Column(db.Integer)
     rdzenietensor=db.Column(db.Integer)
     dlugosckarty=db.Column(db.Integer)
     pcie=db.Column(db.String(15))
