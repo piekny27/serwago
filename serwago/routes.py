@@ -1,5 +1,5 @@
 from flask import redirect, render_template, url_for, flash, request
-from serwago.models import DBConnection
+from serwago.models import DBConnection, User
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
 from serwago.forms import LoginForm 
@@ -14,7 +14,7 @@ def base_page():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login_page():
-    form = LoginForm
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if not user:
