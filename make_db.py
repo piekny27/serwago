@@ -39,14 +39,14 @@ class DBGenerator():
         self.db.flush()
 
     def genRodzaje(self):
-        rodzaje = ["Ukrainki", "Układy scalone", "Słuchawki", "Karty graficzne", "Procesory", "Klawiatury", "Obudowy", "Myszki"]
+        rodzaje = ["Układy scalone", "Słuchawki", "Karty graficzne", "Procesory", "Klawiatury", "Obudowy", "Myszki"]
         for rodzaj in rodzaje:
             self.db.session.add(Rodzaj(nazwa=rodzaj))
             self.db.session.commit()
 
     def genTowary(self):
         inc = 0
-        towary = ["Nastia", "Arduino Nano", "Steelseries Arctis 5", "RTX 3090 Ti", "Intel Core i7-12900K", "Steelseries Apex 7", "Zalman Z-Machine 500 ARGB", "Razer Mamba Elite"]
+        towary = ["Arduino Nano", "Steelseries Arctis 5", "RTX 3090 Ti", "Intel Core i7-12900K", "Steelseries Apex 7", "Zalman Z-Machine 500 ARGB", "Razer Mamba Elite"]
         for towar in towary:
             self.db.session.add(Towar(nazwa=towar, id_rodzaj = inc))
             self.db.session.commit()
