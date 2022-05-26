@@ -55,16 +55,6 @@ class User(db.Model, UserMixin):
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
     profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"),nullable=False)
 
-class UserProfile(db.Model):
-    __tablename__ = "profiles"
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    first_name = db.Column(db.String(30))
-    last_name = db.Column(db.String(30))
-    gender = db.Column(db.String(6))
-    nationality = db.Column(db.String(30))
-    avatarName = db.Column(db.String(30))
-    user=db.relationship('User', backref=db.backref("profiles"))
-    
     @property
     def password(self):
         return self.password_hash
@@ -78,6 +68,17 @@ class UserProfile(db.Model):
     
     def role(self):
         return DBConnection().getRoleName(self.role_id)
+
+class UserProfile(db.Model):
+    __tablename__ = "profiles"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    first_name = db.Column(db.String(30))
+    last_name = db.Column(db.String(30))
+    gender = db.Column(db.String(6))
+    nationality = db.Column(db.String(30))
+    avatarName = db.Column(db.String(30))
+    user=db.relationship('User', backref=db.backref("profiles"))
+      
 
 class Koszyk (db.Model):
     __tablename__="koszyk"
