@@ -62,6 +62,9 @@ class DBGenerator():
                 self.db.session.add(Koszyk(id_towar=num3, id_user = num4 ))
                 self.db.session.commit()
 
+
+    
+
 if __name__ == "__main__":
     generator = DBGenerator()
     generator.cleanDB()

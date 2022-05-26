@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="filler">
+    </div>
+      <div class="wrapper" style="display: inline-block" >
+          <h2>Login page</h2>
+          <p>Fill in the fields below to log in</p>
+          <form method="post">
+              {{form.hidden_tag()}}
+              <div class="form-group">
+                  {{ form.username(type= "text", name="username", placeholder="Username", class="form-control", required onfocus="this.placeholder=''", onblur="this.placeholder='Username'")}}
+                  <!--<input type="text" name="username" class="form-control" value="tu jinja" placeholder="Username" required onfocus="this.placeholder=''" onblur="this.placeholder='Username'">-->
+                  <span class="help-block"> tu jinja walidacja</span>
+              </div>
+              <div class="form-group">
+                  {{ form.username(type= "password", name="password", placeholder="Password", class="form-control", required onfocus="this.placeholder=''", onblur="this.placeholder='Password'")}}
+                  <!--<input type="password" name="password" class="form-control" placeholder="Password" required onfocus="this.placeholder=''" onblur="this.placeholder='Password'">-->
+                  <span class="help-block">tu jinja walidacja</span>
+              </div>
+              <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+                <!--<input type="submit" class="btn btn-primary" value="Login">-->
+              </div>
+              <p>Don't have a account yet?<a href="register.html">Register Here</a>.</p>
+          </form>
+      </div>
+{% endblock %}

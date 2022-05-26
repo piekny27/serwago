@@ -87,4 +87,48 @@ class Rodzaj(db.Model):
     _tablename_="rodzaj"
     id = db.Column(db.Integer, primary_key= True)
     nazwa = db.Column(db.String(50), nullable = False, unique = True)
-    
+
+
+class CPU (db.Model):
+    _tablename_="cpu"
+    id= db.Column(db.Integer, primary_key= True)
+    producent=db.Column(db.String(20))
+    model= db.Column(db.String(50), nullable = False, unique = True)
+    rdzenie=db.Column(db.Integer)
+    watki=db.Column(db.Integer)
+    architektura=db.Column(db.String(50), nullable = False)
+    zegarbase=db.Column(db.Integer)
+    zegarmax=db.Column(db.Integer)
+    iGPU=db.Column(db.Boolean())
+    tdp=db.Column(db.Integer)
+    cache=db.Column(db.String(8))
+    socket=db.Column(db.String(15))
+
+
+
+
+class GPUNVIDIA(db.Model):
+    _tablename_="gpuNVIDIA"
+    id= db.Column(db.Integer, primary_key= True)
+    model= db.Column(db.String(60), nullable = False, unique = True)
+    producent=db.Column(db.String(20))
+    pamiecilosc=db.Column(db.Integer)
+    pamiectyp=db.Column(db.String(8))
+    rdzenietakt=db.Column(db.Integer)
+    rdzenietaktturbo=db.Column(db.Integer)
+    pamiecietakt=db.Column(db.Integer)
+    cuda=db.column(db.Integer)
+    rdzeniert=db.column(db.Integer)
+    rdzenietensor=db.Column(db.Integer)
+    dlugosckarty=db.Column(db.Integer)
+    pcie=db.Column(db.String(15))
+    zlaczaVGA=db.Column(db.Integer)
+    zlaczaDVI=db.Column(db.Integer)
+    zlaczaHDMI=db.Column(db.Integer)
+    zlaczaDP=db.Column(db.Integer)
+    tdp=db.Column(db.Integer)
+    laczeniekart=db.Column(db.Boolean)
+
+
+
+

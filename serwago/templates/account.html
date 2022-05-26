@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+
+{% block title %}
+Account Page
+{% endblock %}
+
+{% block content %}
+<div style "width: 100%">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="welcome.php">Serwago</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="products.html"></a>Products</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"> <a href="account.php"><span class="glyphicon glyphicon-user"></span> Profile: <b>tu jinja pokazująca nick</b>.</a></li>
+                <li> <a href="reset_pwd.php"><span class="glyphicon glyphicon-wrench"></span> Reset password </a></li>
+                <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+{% endblock %}
