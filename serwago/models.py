@@ -80,6 +80,17 @@ class UserProfile(db.Model):
     def role(self):
         return DBConnection().getRoleName(self.role_id)
 
+class UserProfile(db.Model):
+    __tablename__ = "profiles"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    first_name = db.Column(db.String(30))
+    last_name = db.Column(db.String(30))
+    gender = db.Column(db.String(6))
+    nationality = db.Column(db.String(30))
+    avatarName = db.Column(db.String(30))
+    user=db.relationship('User', backref=db.backref("profiles"))
+      
+
 class Koszyk (db.Model):
     __tablename__="koszyk"
     id = db.Column(db.Integer, nullable=False, primary_key= True)

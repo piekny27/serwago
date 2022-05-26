@@ -1,47 +1,76 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Ochrona Danych">
+    <meta name="author" content="Święta Trójca">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Serwago</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
-    <link href='https://fonts.googleapis.com/css?family=Share Tech Mono' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
-    {% block styles %}
-    {% endblock %}
-
-    <title>
-      {% block title %}
-      {% endblock %} 
-    </title>
-</head>
-<body>
-    <div style="width: 100%">
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="base.html">Serwago</a>
+   
+    <link href="../static/style_base_additional.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">        
+          <div class="navbar nav justify-content-center">
+          <nav class="navbar navbar-expand-lg navbar-dark  bg-transparent ">
+            <a class="navbar-brand" href="#">Serwago</a>
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Products</a>
+            <a class="nav-link" href="#">Account</a>    
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Profile:</a>
+              </li>       
+          </nav>
         </div>
-        <ul class="nav navbar-nav">
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="products.html"></a>Products</li>
+        </div>
+      </header>
+      <main role="main" class="inner cover">
+       
 
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"> <a href="account.html"><span class="glyphicon glyphicon-user"></span> Profile: <b></b>Jinja pokazująca profil</a></li>
-          <li><a href="logout.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+         <!-- content  -->
 
-        </ul>
-      </div>
-    </nav>
+      </main>
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Serwago, by Święta Trójca Copyright © 2022 serwago.pl  </a>.</p>
+        </div>
+      </footer>
     </div>
-    {% block content %}
-    {% endblock %}
-</body>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+  <script>
+    document.addEventListener('keydown', function() {
+      if (event.keyCode == 123) {
+        alert("Ta funkcja została wyłączona z powodów bezpieczeństwa.");
+        return false;
+      } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
+        alert("Ta funkcja została wyłączona z powodów bezpieczeństwa.");
+        return false;
+      } else if (event.ctrlKey && event.keyCode == 85) {
+        alert("Ta funkcja została wyłączona z powodów bezpieczeństwa.");
+        return false;
+      }
+    }, false);
+    
+    if (document.addEventListener) {
+      document.addEventListener('contextmenu', function(e) {
+        alert("Ta funkcja została wyłączona z powodów bezpieczeństwa.");
+        e.preventDefault();
+      }, false);
+    } else {
+      document.attachEvent('oncontextmenu', function() {
+        alert("Ta funkcja została wyłączona z powodów bezpieczeństwa.");
+        window.event.returnValue = false;
+      });
+    }
+    </script>
 </html>

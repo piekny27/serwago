@@ -2,7 +2,8 @@ body {
 	font-family: 'Share Tech Mono', monospace;
 
 	font-size: 14px;
-	background-color: rgb(255, 255, 255)
+	background-color: rgb(41, 41, 41);
+	color: white;
 
 }
 
@@ -16,6 +17,9 @@ body {
 	float: left;
 
 
+}
+.table {
+  font-size: 16px;
 }
 input,
 .btn {
@@ -46,11 +50,12 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
+
 .wrapper{
 margin :0 auto;
 padding-bottom: 25px;
 padding: 10px;
-width: 504px;
+width: 600px;
 border: none;
 opacity: 0.85;
 border-radius: 4px;
@@ -61,7 +66,6 @@ left: 50%;
 margin-right: -50%;
 transform: translate(-50%, -50%)
 }
-
 
 .header{
 	text-align: center;
