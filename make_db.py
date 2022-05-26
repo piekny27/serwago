@@ -26,6 +26,7 @@ class DBGenerator():
         self.genArchitektura()
         self.genSocket()
         self.genLaczeniekart()
+        self.genPamiectyp()
         
 
     def genUserRoles(self):
@@ -78,14 +79,11 @@ class DBGenerator():
                 self.db.session.commit()
 
     def genLaczeniekart(self):
-        inc = 0
-        laczeniekart=["SLI", "CrossFireX", "Brak"]
-       
-        
-        for laczeniekart in laczeniekart:
-            self.db.session.add(Laczeniekart(laczeniekart=laczeniekart, maxilosckart=random.randint(0,4)))
-            self.db.session.commit()
-            inc+=1
+        self.db.session.add(Laczeniekart(laczeniekart="SLI", maxilosckart=4))
+        self.db.session.add(Laczeniekart(laczeniekart="CrossFireX", maxilosckart=4))
+        self.db.session.add(Laczeniekart(laczeniekart="Brak", maxilosckart=0))
+        self.db.session.commit()
+            
 
 
     def genProducent(self):
@@ -118,9 +116,24 @@ class DBGenerator():
 
    
     def genCPU(self):
-     self.db.session.add(CPU(id_producent=1, model=4, rdzenie=8, watki=8, id_architektura=6, zegarbase=2.9, zegarmax=4.3, iGPU=0, tdp=65, cache="12 MB", id_socket=4))
-     self.db.session.add(CPU(id_producent=3, model=8, rdzenie=8, watki=16, id_architektura=8, zegarbase=3.0, zegarmax=3.7, iGPU=0, tdp=65, cache="16 MB", id_socket=6))   
-     self.db.session.commit()  
+            for x in range (10):
+                if Towar(id=x, id_rodzaj=4):
+                    
+                        self.db.session.add(CPU(id_producent=1, model=x, rdzenie=8, watki=8, id_architektura=6, zegarbase=2.9, zegarmax=4.3, iGPU=0, tdp=65, cache="12 MB", id_socket=4))
+                        self.db.session.commit()  
+
+
+    def genPamiectyp(self):
+        self.db.session.add(Pamiectyp(pamiectyp="DDR3"))
+        self.db.session.add(Pamiectyp(pamiectyp="DDR5"))
+        self.db.session.add(Pamiectyp(pamiectyp="GDDR5"))
+        self.db.session.add(Pamiectyp(pamiectyp="GDDR5X"))
+        self.db.session.add(Pamiectyp(pamiectyp="GDDR6"))
+        self.db.session.add(Pamiectyp(pamiectyp="HBM2"))
+        self.db.session.commit()
+
+
+
 
 if __name__ == "__main__":
     generator = DBGenerator()
