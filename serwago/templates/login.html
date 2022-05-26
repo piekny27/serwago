@@ -17,12 +17,12 @@
           <form method="post">
               {{form.hidden_tag()}}
               <div class="form-group">
-                  {{ form.username(type= "text", name="username", placeholder="Username", class="form-control", required onfocus="this.placeholder=''", onblur="this.placeholder='Username'")}}
+                  {{ form.username(type= "text", placeholder="Username", class="form-control")}}
                   <!--<input type="text" name="username" class="form-control" value="tu jinja" placeholder="Username" required onfocus="this.placeholder=''" onblur="this.placeholder='Username'">-->
                   <span class="help-block"> tu jinja walidacja</span>
               </div>
               <div class="form-group">
-                  {{ form.username(type= "password", name="password", placeholder="Password", class="form-control", required onfocus="this.placeholder=''", onblur="this.placeholder='Password'")}}
+                  {{ form.password(type= "password", placeholder="Password", class="form-control")}}
                   <!--<input type="password" name="password" class="form-control" placeholder="Password" required onfocus="this.placeholder=''" onblur="this.placeholder='Password'">-->
                   <span class="help-block">tu jinja walidacja</span>
               </div>

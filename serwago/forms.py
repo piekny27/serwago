@@ -2,6 +2,7 @@ from secrets import choice
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
+from serwago.models import User
 
 class RegisterForm(FlaskForm):
     def validate_username(self, username_to_check):
@@ -23,5 +24,5 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     username = StringField(label='Username:', validators=[DataRequired()])
-    password = PasswordField(label='Password:', validators=[DataRequired()])
+    password = PasswordField(label='Password:', validators=[DataRequired(), Length(min=8,max=15)])
     submit = SubmitField(label='Sign in')
