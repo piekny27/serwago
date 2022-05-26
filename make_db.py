@@ -51,13 +51,6 @@ class DBGenerator():
         for x in range(10):
             self.db.session.add(UserProfile(first_name="Mateusz", last_name="Kowalski", gender="Male"))
             self.db.session.commit()
-
-
-
-       
-
-
-
     
 
     def genRodzaje(self):
@@ -122,6 +115,8 @@ class DBGenerator():
                 inc+=1
 
 
+
+   
     def genCPU(self):
      self.db.session.add(CPU(id_producent=1, model=4, rdzenie=8, watki=8, id_architektura=6, zegarbase=2.9, zegarmax=4.3, iGPU=0, tdp=65, cache="12 MB", id_socket=4))
      self.db.session.add(CPU(id_producent=3, model=8, rdzenie=8, watki=16, id_architektura=8, zegarbase=3.0, zegarmax=3.7, iGPU=0, tdp=65, cache="16 MB", id_socket=6))   

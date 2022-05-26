@@ -65,6 +65,7 @@ class UserProfile(db.Model):
     avatarName = db.Column(db.String(30))
     user=db.relationship('User', backref=db.backref("profiles"))
     
+
     @property
     def password(self):
         return self.password_hash
