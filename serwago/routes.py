@@ -39,8 +39,8 @@ def register_page():
                         password=form.password1.data,
                         role_id = 1, profile_id = new_profile.id)
         db.session.add(new_user)
-        db.session.commit()
-        login_user(new_user)
+        db.session.commit()     
+        login_user(new_user)                            
         return redirect(url_for('welcome.html'))
     return render_template("register.html", form=form)    
 
