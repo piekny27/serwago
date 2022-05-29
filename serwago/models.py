@@ -93,6 +93,7 @@ class Towar(db.Model):
     nazwa=db.Column(db.String(50), nullable = False, unique = True)
     id_rodzaj=db.Column(db.Integer, db.ForeignKey("rodzaj.id"), nullable=False)
     ilosc=db.Column(db.Integer)
+    cena=db.Column(db.Float)
     id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"), nullable=False)
     
     
@@ -133,27 +134,13 @@ class Socket (db.Model):
     id=db.Column(db.Integer, primary_key=True)
     socket=db.Column(db.String(10), nullable = False, unique = True)
 
-class Laczeniekart(db.Model):
-    __tablename__='laczeniekart'
-    id=db.Column(db.Integer, primary_key=True)
-    laczeniekart=db.Column(db.String(12), unique=True)
-    maxilosckart=db.Column(db.Integer)
-    
-class Pamiectyp(db.Model):
-    __tablename__="pamiectyp"
-    id=db.Column(db.Integer, primary_key=True)
-    pamiectyp=db.Column(db.String(8), unique=True)
-
-
-
-
 class GPU(db.Model):
     __tablename__="gpu"
     id= db.Column(db.Integer, primary_key= True)
-    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
     id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
     pamiecilosc=db.Column(db.Integer)
-    pamiectyp=db.Column(db.Integer, db.ForeignKey("pamiectyp.id"))
+    id_pamiectyp=db.Column(db.Integer, db.ForeignKey("pamiectyp.id"))
     rdzenietakt=db.Column(db.Integer)
     rdzenietaktturbo=db.Column(db.Integer)
     pamiecietakt=db.Column(db.Integer)
@@ -161,7 +148,7 @@ class GPU(db.Model):
     rdzeniert=db.Column(db.Integer)
     rdzenietensor=db.Column(db.Integer)
     dlugosckarty=db.Column(db.Integer)
-    pcie=db.Column(db.String(15))
+    id_pcie=db.Column(db.String(25), db.ForeignKey("pcie.id"))
     zlaczaVGA=db.Column(db.Integer)
     zlaczaDVI=db.Column(db.Integer)
     zlaczaHDMI=db.Column(db.Integer)
@@ -170,5 +157,84 @@ class GPU(db.Model):
     id_laczeniekart=db.Column(db.Integer, db.ForeignKey("laczeniekart.id"))
 
 
+class Laczeniekart(db.Model):
+    __tablename__='laczeniekart'
+    id=db.Column(db.Integer, primary_key=True)
+    laczeniekart=db.Column(db.String(12), nullable=False, unique=True)
+    maxilosckart=db.Column(db.Integer)
+    
+class Pamiectyp(db.Model):
+    __tablename__="pamiectyp"
+    id=db.Column(db.Integer, primary_key=True)
+    pamiectyp=db.Column(db.String(8), nullable = False, unique = True)
+
+
+class Pcie(db.Model):
+    __tablename__="pcie"
+    id=db.Column(db.Integer, primary_key=True)
+    pcie=db.Column(db.String(20), nullable = False, unique = True)
+
+
+
+class Sluchawki(db.Model):
+    __tablename__="sluchawki"
+    id=db.Column(db.Integer, primary_key=True)
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
+    id_typsluchawek=db.Column(db.Integer, db.ForeignKey("typsluchawek.id"))
+    dlugosckabla=db.Column(db.Float)
+
+
+
+class TypSluchawek(db.Model):
+    __tablename__="typsluchawek"
+    id=db.Column(db.Integer, primary_key=True)
+    typsluchawek=db.Column(db.String(20), nullable = False, unique = True)
+
+class Myszki(db.Model):
+    __tablename__="myszki"
+    id=db.Column(db.Integer, primary_key=True)
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
+    id_typmyszki=db.Column(db.Integer, db.ForeignKey("typmyszki.id"))
+    id_typsensora=db.Column(db.Integer, db.ForeignKey("typsensora.id"))
+    dlugosckabla=db.Column(db.Integer)
+    czulosc=db.Column(db.Integer)
+    id_interfejs=db.Column(db.Integer, db.ForeignKey("interfejs.id"))
+
+class TypMyszki(db.Model):
+    __tablename__="typmyszki"
+    id=db.Column(db.Integer, primary_key=True)
+    typmyszki=db.Column(db.String(20), nullable = False, unique = True)
+
+class TypSensora(db.Model):
+    __tablename__="typsensora"
+    id=db.Column(db.Integer, primary_key=True)
+    typsensora=db.Column(db.String(20), nullable = False, unique = True)
+
+class Klawiatury(db.Model):
+    __tablename__="klawiatury"
+    id=db.Column(db.Integer, primary_key=True)
+    id_producent=db.Column(db.Integer, db.ForeignKey("producent.id"))
+    model= db.Column(db.Integer, db.ForeignKey("towar.id"))
+    id_typklawiatury=db.Column(db.Integer, db.ForeignKey("typklawiatury.id"))
+    dlugosckabla=db.Column(db.Integer)
+    id_interfejs=db.Column(db.Integer, db.ForeignKey("interfejs.id"))
+
+
+
+class TypKlawiatury(db.Model):
+    __tablename__="typklawiatury"
+    id=db.Column(db.Integer, primary_key=True)
+    typklawiatury=db.Column(db.String(20), nullable = False, unique = True)
+
+
+
+
+
+class Interfejs(db.Model):
+    __tablename__="interfejs"
+    id=db.Column(db.Integer, primary_key=True)
+    interfejs=db.Column(db.String(25), nullable = False, unique = True)
 
 
