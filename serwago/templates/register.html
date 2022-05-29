@@ -15,6 +15,9 @@ Register page
     <p>Fill in the fields below to create your account</p>
     <form method="post">
         {{form.hidden_tag()}}
+        {% for key,value in form.errors.items(): %}
+        {% print(value[0]) %}
+        {% endfor %}
         <div class="form-group">
             {{ form.username( placeholder="Username", class="form-control") }}
         </div>

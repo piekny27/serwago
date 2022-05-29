@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(60), nullable = False)
     active = db.Column(db.Boolean(), nullable = False, default = True)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
-    profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"),nullable=False)
+    profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"))
 
     @property
     def password(self):

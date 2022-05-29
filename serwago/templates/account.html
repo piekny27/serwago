@@ -4,23 +4,26 @@
 Account Page
 {% endblock %}
 
+{% block styles %}  
+<link href="../static/styles.css" rel="stylesheet">  
+{% endblock %} 
+
 {% block content %}
 <div class="wrapper" style="display: inline-block" >
     <h2>Your Account</h2>
     <p>Fill in the fields below and click submit to change your account data</p>
-    <form method="post">
-        <div class="form-group"> <label> Username </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Email </label> <input type="email" class="form-control"> </div>
-        <div class="form-group"> <label> Phone Number (optional) </label> <input type="number" class="form-control"> </div>
-        <div class="form-group"> <label> First name </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Last name </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Gender</label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Nationality </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Street number </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Street name </label> <input type="text" class="form-control"> </div>
-        <div class="form-group"> <label> Zip code </label> <input type="text" class="form-control"> </div>
-        <div class="form-group">
-            submit         
+    <form id="msform" method="post">
+        {{form.hidden_tag()}}
+        <div class="form-group"> {{ form.first_name( placeholder="first_name", class="form-control") }}
+        <div class="form-group"> {{ form.last_name( placeholder="last_name", class="form-control") }}
+        <div class="form-group"> {{ form.gender( placeholder="gender", class="form-control") }}
+        <div class="form-group"> {{ form.nationality( placeholder="Username", class="form-control") }}
+        <div class="form-group"> {{ form.phone_number( placeholder="Username", class="form-control") }}
+        <div class="form-group"> {{ form.street_number( placeholder="Username", class="form-control") }}
+        <div class="form-group"> {{ form.street_name( placeholder="Username", class="form-control") }}
+        <div class="form-group"> {{ form.zip_code( placeholder="Username", class="form-control") }}
+        {{ form.submit(type="submit", class="btn btn-primary") }} 
+        <button type="submit" name="next" class="next action-button" value="check_dk">Next</button>     
         </div>
         <p>Don't have a account yet? <a href="register">Register Here</a>.</p>
     </form>

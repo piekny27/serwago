@@ -1,6 +1,7 @@
+from cProfile import label
 from secrets import choice
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, Label
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from serwago.models import User
 
@@ -18,7 +19,8 @@ class RegisterForm(FlaskForm):
     username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired()])
     email_address = StringField(label=" E-mail address:", validators=[Email(),DataRequired()])
     password1 = PasswordField(label = "Password", validators=[Length(min=8),DataRequired()])
-    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1"),DataRequired()])
+    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","chuj ci w dupe"),DataRequired()], )
+    alert =  Label(field_id=1 , text="one")
     submit = SubmitField(label = "Create Account")
 
 

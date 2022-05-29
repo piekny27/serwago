@@ -40,8 +40,10 @@ def register_page():
                         role_id = 1, profile_id = new_profile.id)
         db.session.add(new_user)
         db.session.commit()     
+
         login_user(new_user)                            
         return redirect(url_for('welcome_page'))
+
     return render_template("register.html", form=form)    
 
 @app.route("/logout")
@@ -54,6 +56,14 @@ def account_page():
     if current_user.is_authenticated:
         form = ProfileForm()
         if form.validate_on_submit():
+
+            if request.form.get('next') == 'check_dk':
+                current_user_ID = current_user.id
+                logout_user()
+                db.session.delete(User.query.filter_by(id=current_user_ID).first())
+                db.session.commit()
+                return redirect(url_for('welcome_page'))
+
             newProfile = UserProfile(first_name = form.first_name.data,
                             last_name = form.last_name.data,
                             gender = form.gender.data,
@@ -63,14 +73,14 @@ def account_page():
                             street_number = form.street_number.data,
                             street_name = form.street_name.data,
                             zip_code = form.zip_code.data)
-            current_profile_ID = current_user.profileId
+            current_profile_ID = current_user.profile_id
             db.session.add(newProfile)
             db.session.commit()
-            current_user.profileId = newProfile.id
+            current_user.profile_id = newProfile.id
             db.session.delete(UserProfile.query.filter_by(id=current_profile_ID).first())
             db.session.commit()
             return redirect(url_for('account_page'))
-        currentProfile = UserProfile.query.filter_by(id=current_user.profileId).first()
+        currentProfile = UserProfile.query.filter_by(id=current_user.profile_id).first()
         form.first_name.data = currentProfile.first_name
         form.last_name.data = currentProfile.last_name
         form.gender.data = currentProfile.gender
@@ -80,7 +90,12 @@ def account_page():
         form.street_name.data = currentProfile.street_name
         form.zip_code.data = currentProfile.zip_code
 
-    return render_template("account.html")
+        
+
+
+        return render_template("account.html", form=form)
+    else: 
+        return redirect(url_for('welcome_page'))
 
 
 @app.route("/aboutus")
