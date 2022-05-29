@@ -3,4 +3,4 @@ env/*
 .vscode/*
 __pycache__/*
 serwago/__pycache__/*
-DataBase.db
+serwago/DataBase.db

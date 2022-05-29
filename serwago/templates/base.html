@@ -32,7 +32,7 @@
             {% if current_user.is_authenticated %}
             <a class="nav-link" href="/account">Account</a> 
             <a class="nav-link" href="/logout">Log out</a>    
-                <a class="nav-link active" aria-current="page">Profile: </a>    
+            <a class="nav-link active" aria-current="page" href="/account">Profile: {{current_user.username }}</a>   
             {% endif %} 
           </nav>
         </div>

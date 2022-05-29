@@ -1,6 +1,6 @@
 from secrets import choice
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from serwago.models import User
 
@@ -26,3 +26,14 @@ class LoginForm(FlaskForm):
     username = StringField(label='Username:', validators=[DataRequired()])
     password = PasswordField(label='Password:', validators=[DataRequired(), Length(min=8,max=15)])
     submit = SubmitField(label='Sign in')
+
+class ProfileForm(FlaskForm):
+    first_name = StringField(label="First name", validators=[DataRequired(message='Can\'t be blank')])
+    last_name = StringField(label="Last name", validators=[DataRequired()])
+    gender = StringField(label="Gender", validators=[DataRequired()])
+    nationality = StringField(label="Nationality", validators=[DataRequired()])
+    phone_number = IntegerField(label="Phone", validators=[DataRequired()])
+    street_number = IntegerField(label="Phone", validators=[DataRequired()])
+    street_name = StringField(label="Nationality", validators=[DataRequired()])
+    zip_code = IntegerField(label="Nationality", validators=[DataRequired()])
+    submit = SubmitField(label = "Save Profile")

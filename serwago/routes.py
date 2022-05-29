@@ -2,11 +2,12 @@ from flask import redirect, render_template, url_for, flash, request
 from serwago.models import DBConnection, User, UserProfile
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
-from serwago.forms import LoginForm, RegisterForm 
+from serwago.forms import LoginForm, RegisterForm, ProfileForm
 
 db = DBConnection()
 
 
+@app.route("/")
 @app.route("/welcome")
 def welcome_page():
     return render_template("welcome.html")
@@ -48,8 +49,37 @@ def logout_page():
     logout_user()
     return render_template("welcome.html")    
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 def account_page():
+    if current_user.is_authenticated:
+        form = ProfileForm()
+        if form.validate_on_submit():
+            newProfile = UserProfile(first_name = form.first_name.data,
+                            last_name = form.last_name.data,
+                            gender = form.gender.data,
+                            nationality = form.nationality.data,
+                            avatarName = "avatar12",
+                            phone_number = form.phone_number.data,
+                            street_number = form.street_number.data,
+                            street_name = form.street_name.data,
+                            zip_code = form.zip_code.data)
+            current_profile_ID = current_user.profileId
+            db.session.add(newProfile)
+            db.session.commit()
+            current_user.profileId = newProfile.id
+            db.session.delete(UserProfile.query.filter_by(id=current_profile_ID).first())
+            db.session.commit()
+            return redirect(url_for('account_page'))
+        currentProfile = UserProfile.query.filter_by(id=current_user.profileId).first()
+        form.first_name.data = currentProfile.first_name
+        form.last_name.data = currentProfile.last_name
+        form.gender.data = currentProfile.gender
+        form.nationality.data = currentProfile.nationality
+        form.phone_number.data = currentProfile.phone_number
+        form.street_number.data = currentProfile.street_number
+        form.street_name.data = currentProfile.street_name
+        form.zip_code.data = currentProfile.zip_code
+
     return render_template("account.html")
 
 
