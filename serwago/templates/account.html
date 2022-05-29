@@ -5,22 +5,25 @@ Account Page
 {% endblock %}
 
 {% block content %}
-<div style "width: 100%">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="welcome.php">Serwago</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="products.html"></a>Products</li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"> <a href="account.php"><span class="glyphicon glyphicon-user"></span> Profile: <b>tu jinja pokazująca nick</b>.</a></li>
-                <li> <a href="reset_pwd.php"><span class="glyphicon glyphicon-wrench"></span> Reset password </a></li>
-                <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>
-      </ul>
-    </div>
-  </nav>
-  </div>
+<div class="wrapper" style="display: inline-block" >
+    <h2>Your Account</h2>
+    <p>Fill in the fields below and click submit to change your account data</p>
+    <form method="post">
+        <div class="form-group"> <label> Username </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Email </label> <input type="email" class="form-control"> </div>
+        <div class="form-group"> <label> Phone Number (optional) </label> <input type="number" class="form-control"> </div>
+        <div class="form-group"> <label> First name </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Last name </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Gender</label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Nationality </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Street number </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Street name </label> <input type="text" class="form-control"> </div>
+        <div class="form-group"> <label> Zip code </label> <input type="text" class="form-control"> </div>
+        <div class="form-group">
+            submit         
+        </div>
+        <p>Don't have a account yet? <a href="register">Register Here</a>.</p>
+    </form>
+</div>
+
 {% endblock %}
