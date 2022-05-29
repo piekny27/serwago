@@ -77,6 +77,10 @@ class UserProfile(db.Model):
     gender = db.Column(db.String(6))
     nationality = db.Column(db.String(30))
     avatarName = db.Column(db.String(30))
+    phone_number = db.Column(db.String(30))
+    street_number = db.Column(db.String(30))
+    street_name = db.Column(db.String(30))
+    zip_code = db.Column(db.Integer)
     user=db.relationship('User', backref=db.backref("profiles"))
     
 
