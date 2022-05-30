@@ -1,7 +1,7 @@
 from importlib.resources import path
 from unicodedata import name
 from flask import redirect, render_template, url_for, flash, request 
-from serwago.models import DBConnection, User, UserProfile
+from serwago.models import DBConnection, User, UserProfile, Towar
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
 from serwago.forms import LoginForm, RegisterForm, ProfileForm, CartForm, ProductForm
@@ -105,7 +105,11 @@ def aboutus_page():
 
 @app.route("/products")
 def products_page():
-    return render_template("products.html")    
+    choice=5
+    form=Towar.query.filter_by(id_rodzaj=choice).all()
+    
+    
+    return render_template("products.html", form=form)    
 
 @app.route("/cart")
 def cart_page():

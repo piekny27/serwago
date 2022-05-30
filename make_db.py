@@ -56,7 +56,7 @@ class DBGenerator():
         self.db.addUser(admin)
         admin = User(username="DiFortis", email="difortis3@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
-        admin = User(username="NoaniX", email="mateusz@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
+        admin = User(username="NoaniX", email="mateusz@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10), id_cart=1)
         self.db.addUser(admin)
         self.users.append(admin)
         inc=0

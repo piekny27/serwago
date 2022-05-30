@@ -67,6 +67,7 @@
                             </div>
                         </div>
                     </div>
+                    {% for item in form %}
                     <div class="col-sm-6 col-lg-4 mb-2 graphics">
                         <div class="portfolio-wrapper">
                             <div class="portfolio-image">
@@ -77,12 +78,15 @@
                                     <a class="popimg ml-0" href="#">
                                         <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
                                     </a>
-                                    <h4>GeForce RTX 3080  </h4>
+                                    <h4>
+                                        {{item.nazwa}}
+                                    </h4>
                                     <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                     <div class="col-sm-6 col-lg-4 mb-2 disks">
                         <div class="portfolio-wrapper">
                             <div class="portfolio-image">
