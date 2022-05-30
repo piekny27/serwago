@@ -48,7 +48,7 @@ class CartForm(FlaskForm):
     products = FieldList(FormField(ProductForm), label="Products", min_entries=0, max_entries=999)
     amount = FloatField(label="Amount", validators=[DataRequired()])
     coupon_code = StringField(label="Coupon code")
-    coupon_msg = StringField(label="Coupon message")
+    note_msg = StringField(label="Note message")
     submit = SubmitField(label = "Submit")
 
 

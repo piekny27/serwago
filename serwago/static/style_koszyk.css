@@ -95,3 +95,15 @@ input[type=submit]:hover {
     margin-left: 5px;
     border: 0px;
 }
+
+.cover-container {
+  max-width: 1200px;
+}
+
+.mastfoot{
+  text-align: center;
+}
+
+#qty{
+  text-align: center;
+}

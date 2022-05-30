@@ -113,14 +113,7 @@ def cart_page():
         cart_form = CartForm()
         product_form = ProductForm(name="Olek",qty=10,total=3,price=2.50)
         cart_form.products.append_entry(CartForm())
-
-        products = current_user.cart
-
-        for product in products:
-            pass
-
-        return render_template("base.html", form=form)
-    return render_template("products.html") 
+    return render_template("cart.html") 
 
 
 @app.route("/reset_pwd")
