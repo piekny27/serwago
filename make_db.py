@@ -96,8 +96,7 @@ class DBGenerator():
             num2 = random.randint(0, 10)
             for towar in range(num2):
                 num3 = random.randint(1, 8)
-                num4 = random.randint(1, 8)
-                self.db.session.add(Koszyk(id_towar=num3, id_user = num4 ))
+                self.db.session.add(Koszyk(id_towar=num3 ))
                 self.db.session.commit()
 
 

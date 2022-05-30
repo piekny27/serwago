@@ -16,26 +16,26 @@ class RegisterForm(FlaskForm):
         if email_address:
             raise ValidationError('E-mail Address already exists! Please try a different email address')
 
-    username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
-    email_address = StringField(label=" E-mail address:", validators=[Email(),DataRequired()])
-    password1 = PasswordField(label = "Password", validators=[Length(min=8),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
-    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","The password is too short."),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")], )
+    username = StringField(label="Username", validators=[Length(min=2, max=30, message="The username is too short or too long. Use 2-30 characters."), DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
+    email_address = StringField(label=" E-mail address:", validators=[Email(message="E-mail is not in a correct format. Use a correct e-mail address."),DataRequired()])
+    password1 = PasswordField(label = "Password", validators=[Length(min=8, max=15, message="The password is too short. Use at least 8 characters"),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
+    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","The passwords don't match"),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")], )
     submit = SubmitField(label = "Create Account")
 
 class LoginForm(FlaskForm):
-    username = StringField(label='Username:', validators=[DataRequired()])
-    password = PasswordField(label='Password:', validators=[DataRequired(), Length(min=8,max=15)])
+    username = StringField(label='Username:', validators=[DataRequired(), Length(min=2, max=30), Regexp(r'^[\w.@+-]+$')])
+    password = PasswordField(label='Password:', validators=[DataRequired(), Length(min=8,max=15), Regexp(r'^[\w.@+-]+$')])
     submit = SubmitField(label='Sign in')
 
 class ProfileForm(FlaskForm):
     first_name = StringField(label="First name", validators=[DataRequired(message='Can\'t be blank')])
-    last_name = StringField(label="Last name", validators=[DataRequired()])
-    gender = StringField(label="Gender", validators=[DataRequired()])
-    nationality = StringField(label="Nationality", validators=[DataRequired()])
-    phone_number = IntegerField(label="Phone", validators=[DataRequired()])
-    street_number = IntegerField(label="Phone", validators=[DataRequired()])
-    street_name = StringField(label="Nationality", validators=[DataRequired()])
-    zip_code = IntegerField(label="Nationality", validators=[DataRequired()])
+    last_name = StringField(label="Last name", validators=[DataRequired(message='Can\'t be blank')])
+    gender = StringField(label="Gender", validators=[DataRequired(message='Can\'t be blank')])
+    nationality = StringField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
+    phone_number = IntegerField(label="Phone", validators=[DataRequired(message='Can\'t be blank')])
+    street_number = IntegerField(label="Phone", validators=[DataRequired(message='Can\'t be blank')])
+    street_name = StringField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
+    zip_code = IntegerField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
     submit = SubmitField(label = "Save Profile")
 
 class ProductForm(Form):

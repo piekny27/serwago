@@ -54,6 +54,7 @@ class User(db.Model, UserMixin):
     active = db.Column(db.Boolean(), nullable = False, default = True)
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
     profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"))
+    id_cart=db.Column(db.Integer, db.ForeignKey("koszyk.id"))
 
     @property
     def password(self):
@@ -90,8 +91,9 @@ class Koszyk (db.Model):
     id = db.Column(db.Integer, nullable=False, primary_key= True)
     id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
     cena=db.Column(db.Integer, db.ForeignKey("towar.cena"))
-    id_user = db.Column(db.Integer, db.ForeignKey("users.id"))
     id_kupon=db.Column(db.Integer, db.ForeignKey("kupon.id"))
+
+
 
 class Towar(db.Model):
     __tablename__="towar"
