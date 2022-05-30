@@ -1,14 +1,174 @@
-{% extends "base.html"%}
-
-{% block styles %}
-
-{% endblock %}
-
-{% block title %}
-
-{% endblock %}
-
-{% block content %}
-
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>portfolio with category filter using isotope js - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/styles_products.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="description" content="Ochrona Danych">
+    <meta name="author" content="Święta Trójca">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="../static/style_base_additional.css" rel="stylesheet">
+    <link href="../static/style_koszyk.css" rel="stylesheet">
+    </head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous"></script>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto w-100">
+            <div class="inner">        
+                <div class="navbar nav justify-content-center">
+                <nav class="navbar navbar-expand-lg navbar-dark  bg-transparent ">
+                <a class="navbar-brand" href="/welcome">Serwago</a>
+                <a class="nav-link active" href="/welcome">Home</a>
+                <a class="nav-link" href="/products">Products</a>
+                {% if not current_user.is_authenticated %}
+                <a class="nav-link" href="/login">Log in</a>
+                {% endif %} 
+                {% if current_user.is_authenticated %}
+                <a class="nav-link" href="/account">Account</a> 
+                <a class="nav-link" href="/logout">Log out</a>    
+                <a class="nav-link active" aria-current="page" href="/account">Profile: {{current_user.username }}</a>
+                <a class="nav-link" href="/cart">Cart</a> 
+                {% endif %} 
+                
+        </header>
+    <section id="section">
+    <div class="container">
+        <div id="rzedy" class="row no-gutters">
+            <div class="filtering col-sm-12 text-center">
+                <span data-filter="*" class="active">All</span>
+                <span data-filter=".processors" class="">Processors</span>
+                <span data-filter=".graphics" class="">Graphics</span>
+                <span data-filter=".disks" class="">Disks</span>
+            </div>
+            <div id="kolumny" class="col-12 text-center w-100">
+                <div class="form-row gallery">
+                    <div class="col-sm-6 col-lg-4 mb-2 disks">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/FFB6C1/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>Toshiba P300</h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-2 graphics">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/87CEFA/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>GeForce RTX 3080  </h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-2 disks">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/C71585/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>Seagate STDM002</h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-2 mb-lg-0 graphics">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/20B2AA/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>AMD Radeon RX6900XT</h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-2 mb-sm-0 processors">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/FFA07A/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>Intel Core i7</h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 graphics">
+                        <div class="portfolio-wrapper">
+                            <div class="portfolio-image">
+                                <img src="https://via.placeholder.com/350x350/9932CC/000000" alt="..." />
+                            </div>
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <a class="popimg ml-0" href="#">
+                                        <i class="ti-zoom-in display-24 display-md-23 display-lg-22 display-xl-20"></i>
+                                    </a>
+                                    <h4>GeForce GTX 1080  </h4>
+                                    <button id="add_cart" type="button" class="btn btn-dark">Add to cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="stopka" class="mastfoot mt-auto">
+    <div class="inner">
+    <p>Serwago, by Święta Trójca Copyright © 2022 serwago.pl  </a>.</p>
+    </div>
+</footer>
+</div>
+<script type="text/javascript">
+$(function(){
+    $(".filtering").on("click", "span", function () {
+        var a = $(".gallery").isotope({});
+        var e = $(this).attr("data-filter");
+        a.isotope({ filter: e });
+    });
+    $(".filtering").on("click", "span", function () {
+        $(this).addClass("active").siblings().removeClass("active");
+    });
+})
+</script>
+</body>
+</html>
