@@ -1,7 +1,7 @@
 from cProfile import label
 from secrets import choice
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, FloatField, FieldList, Form, FormField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, FloatField, FieldList, Form, FormField, TextAreaField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, Regexp
 from serwago.models import User
 
@@ -38,17 +38,23 @@ class ProfileForm(FlaskForm):
     zip_code = IntegerField(label="Nationality", validators=[DataRequired()])
     submit = SubmitField(label = "Save Profile")
 
-class ProductForm(Form):
+class ProductForm(FlaskForm):
     name = StringField(label="Name", validators=[DataRequired()])
     qty = IntegerField(label="Quantity", validators=[DataRequired()])
     total = IntegerField(label="Total", validators=[DataRequired()])
     price = FloatField(label="Price", validators=[DataRequired()])
+    class Meta:
+        csrf = False
+
 
 class CartForm(FlaskForm):
     products = FieldList(FormField(ProductForm), label="Products", min_entries=0, max_entries=999)
     amount = FloatField(label="Amount", validators=[DataRequired()])
+    sub_total = FloatField(label="Amount", validators=[DataRequired()])
+    tax = FloatField(label="Amount", validators=[DataRequired()])
+    shipping = FloatField(label="Amount", validators=[DataRequired()])
     coupon_code = StringField(label="Coupon code")
-    note_msg = StringField(label="Note message")
+    note_msg = TextAreaField(label="Note message")
     submit = SubmitField(label = "Submit")
 
 

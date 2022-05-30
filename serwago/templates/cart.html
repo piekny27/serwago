@@ -57,42 +57,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    {% if current_user.is_authenticated %}
+                                                    {% set count = namespace(value=1) %}
+                                                    {% for product in form.products %}
                                                     <tr>
-                                                        <th scope="row">1</th>
+                                                        <th scope="row">{{count.value}}</th>
                                                         <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td>Apple Watch</td>
+                                                        <td>{{product.form.name.object_data.data}}</td>
                                                         <td>
                                                             <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty1" id="cartQty1" value="1">
+                                                                {{ product.form.qty(class="form-control", value=product.form.qty.object_data.data) }}
                                                             </div>
                                                         </td>
-                                                        <td>$10</td>
-                                                        <td class="text-right">$500</td>
+                                                        <td>{{product.data['price'].data}}</td>
+                                                        <!-- wymnoz pan mi to i daj do total -->
+                                                        <td class="text-right">{{product.form.total.object_data.data}}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td>Apple iPhone</td>
-                                                        <td>
-                                                            <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty2" id="cartQty2" value="1">
-                                                            </div>
-                                                        </td>
-                                                        <td>$20</td>
-                                                        <td class="text-right">$200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td>Apple iPad</td>
-                                                        <td>
-                                                            <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty3" id="cartQty3" value="1">
-                                                            </div>
-                                                        </td>
-                                                        <td>$30</td>
-                                                        <td class="text-right">$300</td>
-                                                    </tr>
+                                                    {% set count.value = count.value + 1 %}
+                                                    {% endfor %}
+                                                    {% endif %}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -104,15 +87,15 @@
                                                     <form>
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input type="search" class="form-control" placeholder="Coupon Code" aria-label="Search" aria-describedby="button-addonTags">
+                                                                {{ form.coupon_code( placeholder="Coupon Code", class="form-control") }}
                                                                 <div class="input-group-append">
-                                                                    <button id="apply_coupon" class="input-group-text" type="submit" id="button-addonTags">Apply</button>
+                                                                    <button id="apply_coupon" class="input-group-text" type="submit" id="button-addonTags" value="apply">Apply</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="specialNotes">Special Note for this order:</label>
-                                                            <textarea class="form-control" name="specialNotes" id="specialNotes" rows="3" placeholder="Message here"></textarea>
+                                                            {{ form.note_msg( placeholder="Message here", class="form-control", id="specialNotes", rows="3") }}
                                                         </div>
                                                     </form>
                                                 </div>
@@ -123,19 +106,19 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Sub Total :</td>
-                                                                <td>$1000.00</td>
+                                                                <td>{{form.sub_total}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Shipping :</td>
-                                                                <td>$0.00</td>
+                                                                <td>{{form.shipping}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Tax(18%) :</td>
-                                                                <td>$180.00</td>
+                                                                <td>{{form.tax}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="f-w-7 font-18"><h4>Amount :</h4></td>
-                                                                <td class="f-w-7 font-18"><h4>$1180.00</h4></td>
+                                                                <td class="f-w-7 font-18"><h4>{{form.amount}}</h4></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
