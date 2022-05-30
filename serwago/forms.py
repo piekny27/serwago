@@ -16,13 +16,11 @@ class RegisterForm(FlaskForm):
         if email_address:
             raise ValidationError('E-mail Address already exists! Please try a different email address')
 
-    username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired(), Regexp(r'^[\w.@+-]+$')])
+    username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
     email_address = StringField(label=" E-mail address:", validators=[Email(),DataRequired()])
-    password1 = PasswordField(label = "Password", validators=[Length(min=8),DataRequired()])
-    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","chuj ci w dupe"),DataRequired()], )
-    alert =  Label(field_id=1 , text="one")
+    password1 = PasswordField(label = "Password", validators=[Length(min=8),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")])
+    password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","The password is too short."),DataRequired(), Regexp(r'^[\w.@+-]+$', message="Use correct characters:[0-9],[a-z], special characters")], )
     submit = SubmitField(label = "Create Account")
-
 
 class LoginForm(FlaskForm):
     username = StringField(label='Username:', validators=[DataRequired()])
