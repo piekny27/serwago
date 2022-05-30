@@ -28,14 +28,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField(label='Sign in')
 
 class ProfileForm(FlaskForm):
-    first_name = StringField(label="First name", validators=[DataRequired(message='Can\'t be blank')])
-    last_name = StringField(label="Last name", validators=[DataRequired(message='Can\'t be blank')])
-    gender = StringField(label="Gender", validators=[DataRequired(message='Can\'t be blank')])
-    nationality = StringField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
-    phone_number = IntegerField(label="Phone", validators=[DataRequired(message='Can\'t be blank')])
-    street_number = IntegerField(label="Phone", validators=[DataRequired(message='Can\'t be blank')])
-    street_name = StringField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
-    zip_code = IntegerField(label="Nationality", validators=[DataRequired(message='Can\'t be blank')])
+    first_name = StringField(label="First name", validators=[DataRequired()])
+    last_name = StringField(label="Last name", validators=[DataRequired()])
+    gender = StringField(label="Gender", validators=[DataRequired()])
+    nationality = StringField(label="Nationality", validators=[DataRequired()])
+    phone_number = IntegerField(label="Phone", validators=[DataRequired()])
+    street_number = IntegerField(label="Phone", validators=[DataRequired()])
+    street_name = StringField(label="Nationality", validators=[DataRequired()])
+    zip_code = IntegerField(label="Nationality", validators=[DataRequired()])
     submit = SubmitField(label = "Save Profile")
 
 class ProductForm(Form):
