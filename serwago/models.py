@@ -91,8 +91,9 @@ class Koszyk (db.Model):
     __tablename__="koszyk"
     id = db.Column(db.Integer, nullable=False, primary_key= True)
     id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
-    cena=db.Column(db.Integer, db.ForeignKey("towar.cena"))
+    towar=db.relationship('Towar', backref=db.backref('koszyk'))
     id_kupon=db.Column(db.Integer, db.ForeignKey("kupon.id"))
+    kupon=db.relationship('Kupon', backref=db.backref('koszyk'))
 
 
 
