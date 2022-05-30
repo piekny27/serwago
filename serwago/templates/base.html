@@ -36,9 +36,11 @@
             <a class="nav-link" href="/logout">Log out</a>    
             <a class="nav-link active" aria-current="page" href="/account">Profile: {{current_user.username }}</a>   
             {% endif %} 
+            {% if request.full_path=="/products?" %}
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Koszyk">
               Koszyk
             </button>
+            {% endif %}
             <!-- The Modal -->
             <div class="modal" id="Koszyk">
               <div class="modal-dialog modal-xl">
@@ -244,5 +246,16 @@
       });
     }
     </script>
+<!-- XSS Protection -->
+    <script>
+      function htmlEncode(str){
+        return String(str).replace(/[^\w. ]/gi, function(c){
+            return '&#'+c.charCodeAt(0)+';';
+        });
+    }
+    </script>
+<!-- XSS Protection End -->
+<script>
 
+</script>
 </html>

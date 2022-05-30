@@ -16,7 +16,7 @@ Register page
     <form method="post">
         {{form.hidden_tag()}}
         {% for key,value in form.errors.items(): %}
-        <!-- piotrek to mily gosc -->
+        
         {% print(value[0]) %}
         {% endfor %}
         <div class="form-group">
