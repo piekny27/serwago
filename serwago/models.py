@@ -55,6 +55,7 @@ class User(db.Model, UserMixin):
     role_id = db.Column(db.Integer, db.ForeignKey("roles.id"), nullable=False)
     profile_id=db.Column(db.Integer, db.ForeignKey("profiles.id", ondelete="CASCADE"))
     id_cart=db.Column(db.Integer, db.ForeignKey("koszyk.id"))
+    cart=db.relationship('Koszyk', backref=db.backref("users"))
 
     @property
     def password(self):
