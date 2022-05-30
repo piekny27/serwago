@@ -1,7 +1,7 @@
 from importlib.resources import path
 from unicodedata import name
 from flask import redirect, render_template, url_for, flash, request 
-from serwago.models import DBConnection, User, UserProfile
+from serwago.models import DBConnection, User, UserProfile, Koszyk
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
 from serwago.forms import LoginForm, RegisterForm, ProfileForm, CartForm, ProductForm
@@ -105,15 +105,39 @@ def aboutus_page():
 
 @app.route("/products")
 def products_page():
-    return render_template("products.html")    
+    if current_user.is_authenticated:
+        form = CartForm()
+        product1 = ProductForm(name="Olek",qty=10,total=3,price=2.50)
+        product2 = ProductForm(name="Piotrek",qty=999,total=3,price=2.59)
+
+        form.products.append_entry(product1)
+        form.products.append_entry(product2)
+        
+
+
+
+        return render_template("base.html", form=form)
+    return render_template("products.html")        
 
 @app.route("/cart")
 def cart_page():
+    form = CartForm()
     if current_user.is_authenticated:
-        cart_form = CartForm()
-        product_form = ProductForm(name="Olek",qty=10,total=3,price=2.50)
-        cart_form.products.append_entry(CartForm())
-    return render_template("cart.html") 
+        current_user.cart.towar
+        product1 = ProductForm(name="Olek",qty=998,total=33,price=2.50)
+        product2 = ProductForm(name="Piotrek",qty=999,total=34,price=2.59)
+
+        form.products.append_entry(product1)
+        form.products.append_entry(product2)
+        form.amount = 199.12
+        form.shipping = 10.99
+        form.tax = 11.01
+        form.sub_total = 1000.11
+        
+
+
+        return render_template("cart.html", form=form)
+    return render_template("cart.html", form=form)   
 
 
 @app.route("/reset_pwd")
