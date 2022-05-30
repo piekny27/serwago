@@ -51,11 +51,11 @@ class DBGenerator():
         usernames = ["Bartek", "Ola", "Karolina", "Kasia", "Natalia", "Krzysztof", "Jan", "Aleksander", "Mateusz", "Piotr"]
         admin = User(username="Kacper", email="Kacper@gmail.com", password_hash=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)), role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
-        admin = User(username="Aleksander Trzeciak", email="olexix@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
+        admin = User(username="OlexTix", email="olexix@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
-        admin = User(username="Piotr Orwiński", email="difortis3@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
+        admin = User(username="DiFortis", email="difortis3@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
-        admin = User(username="Mateusz Piękny", email="m.piekny97@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
+        admin = User(username="NoaniX", email="mateusz@gmail.com", password='12345678', role_id = 2, profile_id=random.randint(1,10))
         self.db.addUser(admin)
         self.users.append(admin)
         inc=0

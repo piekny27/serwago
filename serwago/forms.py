@@ -2,7 +2,7 @@ from cProfile import label
 from secrets import choice
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, Label
-from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
+from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, Regexp
 from serwago.models import User
 
 class RegisterForm(FlaskForm):
@@ -16,7 +16,7 @@ class RegisterForm(FlaskForm):
         if email_address:
             raise ValidationError('E-mail Address already exists! Please try a different email address')
 
-    username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired()])
+    username = StringField(label="Username", validators=[Length(min=2, max=30), DataRequired(), Regexp(r'^[\w.@+-]+$')])
     email_address = StringField(label=" E-mail address:", validators=[Email(),DataRequired()])
     password1 = PasswordField(label = "Password", validators=[Length(min=8),DataRequired()])
     password2 = PasswordField(label = "Confirm Password", validators=[EqualTo("password1","chuj ci w dupe"),DataRequired()], )
