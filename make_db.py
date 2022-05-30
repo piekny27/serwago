@@ -22,6 +22,7 @@ class DBGenerator():
         self.genRodzaje()
         self.genTowary()
         self.genKoszyk()
+        self.genKupon()
         self.genCPU()
         self.genGPU()
         self.genMyszki()
@@ -98,6 +99,16 @@ class DBGenerator():
                 num4 = random.randint(1, 8)
                 self.db.session.add(Koszyk(id_towar=num3, id_user = num4 ))
                 self.db.session.commit()
+
+
+    def genKupon(self):
+        inc = 0
+        kupon=["SERWAGO1", "SERWAGO20", "SERWAGO69"]
+        for kupon in kupon:
+                self.db.session.add(Kupon(kupon=kupon))
+                self.db.session.commit()
+                inc+=1
+
 
     def genProducent(self):
         inc = 0

@@ -89,7 +89,9 @@ class Koszyk (db.Model):
     __tablename__="koszyk"
     id = db.Column(db.Integer, nullable=False, primary_key= True)
     id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
+    cena=db.Column(db.Integer, db.ForeignKey("towar.cena"))
     id_user = db.Column(db.Integer, db.ForeignKey("users.id"))
+    id_kupon=db.Column(db.Integer, db.ForeignKey("kupon.id"))
 
 class Towar(db.Model):
     __tablename__="towar"
@@ -240,5 +242,11 @@ class Interfejs(db.Model):
     __tablename__="interfejs"
     id=db.Column(db.Integer, primary_key=True)
     interfejs=db.Column(db.String(25), nullable = False, unique = True)
+
+
+class Kupon(db.Model):
+    __tablename__="kupon"
+    id=db.Column(db.Integer, primary_key=True)
+    kupon=db.Column(db.String(10), nullable=False, unique=True)
 
 
