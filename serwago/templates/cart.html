@@ -104,7 +104,7 @@
                                                     <form>
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                <input type="search" class="form-control" placeholder="Coupon Code" aria-label="Search" aria-describedby="button-addonTags"></input>
+                                                                <input type="search" class="form-control" placeholder="Coupon Code" aria-label="Search" aria-describedby="button-addonTags">
                                                                 <div class="input-group-append">
                                                                     <button id="apply_coupon" class="input-group-text" type="submit" id="button-addonTags">Apply</button>
                                                                 </div>
@@ -112,7 +112,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="specialNotes">Special Note for this order:</label>
-                                                        {{ form.note_msg(type="textarea", id="note_msg", class="form-control", placeholder="Message here") }}
+                                                            <textarea class="form-control" name="specialNotes" id="specialNotes" rows="3" placeholder="Message here"></textarea>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -135,7 +135,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="f-w-7 font-18"><h4>Amount :</h4></td>
-                                                                <td class="f-w-7 font-18"><h4>{form.amount.value}</h4></td>
+                                                                <td class="f-w-7 font-18"><h4>$1180.00</h4></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
