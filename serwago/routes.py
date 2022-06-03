@@ -22,6 +22,7 @@ def login_page():
             user = User.query.filter_by(email=form.username.data).first()
         if user and user.check_password_correction(attempted_password = form.password.data):
             login_user(user)
+            flash("Zalogowałeś się!")
             return redirect(url_for('welcome_page'))
     return render_template("login.html", form=form)
     
@@ -48,11 +49,13 @@ def register_page():
     return render_template("register.html", form=form)    
 
 @app.route("/logout")
+@login_required
 def logout_page():
     logout_user()
     return render_template("welcome.html")    
 
 @app.route("/account", methods=['GET', 'POST'])
+@login_required
 def account_page():
     if current_user.is_authenticated:
         form = ProfileForm()
@@ -101,7 +104,11 @@ def account_page():
 
 @app.route("/aboutus")
 def aboutus_page():
-    return render_template("aboutus.html")    
+    return render_template("aboutus.html") 
+
+@app.route("/privacypolicy")
+def privacypolicy_page():
+    return render_template("privacypolicy.html")    
 
 @app.route("/products")
 def products_page():
@@ -112,6 +119,7 @@ def products_page():
     return render_template("products.html", form=form)    
 
 @app.route("/cart")
+@login_required
 def cart_page():
     if current_user.is_authenticated:
         cart_form = CartForm()
@@ -121,5 +129,7 @@ def cart_page():
 
 
 @app.route("/reset_pwd")
+@login_required
 def resetpwd_page():
     return render_template("reset_pwd.html")
+    
