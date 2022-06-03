@@ -1,5 +1,6 @@
-from serwago import db, bcrypt, login_manager
+from serwago import db, login_manager
 from flask_login import UserMixin
+from passlib.hash import sha256_crypt
 
 
 @login_manager.user_loader
@@ -63,10 +64,11 @@ class User(db.Model, UserMixin):
 
     @password.setter
     def password(self, plain_text_password):
-        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+        self.password_hash = sha256_crypt.using(rounds=10000).hash(plain_text_password)#.decode('utf-8')
+        #self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
     def check_password_correction(self, attempted_password):
-        return bcrypt.check_password_hash(self.password_hash, attempted_password)
+        return sha256_crypt.verify(attempted_password, self.password_hash)
     
     def role(self):
         return DBConnection().getRoleName(self.role_id)
