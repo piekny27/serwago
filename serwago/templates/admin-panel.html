@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+
+{% block title %}
+Admin Panel
+{% endblock %}
+
+{% block styles %}  
+<link href="../static/styles.css" rel="stylesheet">  
+{% endblock %} 
+
+{% block content %}
+<div class="wrapper" style="display: inline-block" >
+    <h2>Panel</h2>
+    <p>Select a User from a list and click a button to delete one of them</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Username</td>
+				<td>E-mail</td>
+                <td>Delete user</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% set data = namespace(user=0) %}
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td class="deletes">
+                    <form method="post">
+                <button id="delete" type="submit" name="delete" class="delete action-button" value="{{user.id}}">Delete account</button>
+                {% set data.user=data.user+1 %}
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+</table>
+</div>
+
+{% endblock %}

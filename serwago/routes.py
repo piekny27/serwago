@@ -5,6 +5,8 @@ from serwago.models import DBConnection, User, UserProfile, Towar
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
 from serwago.forms import LoginForm, RegisterForm, ProfileForm, CartForm, ProductForm
+
+
 db = DBConnection()
 
 
@@ -67,6 +69,7 @@ def account_page():
                 db.session.delete(User.query.filter_by(id=current_user_ID).first())
                 db.session.commit()
                 return redirect(url_for('welcome_page'))
+            
 
             newProfile = UserProfile(first_name = form.first_name.data,
                             last_name = form.last_name.data,
@@ -132,4 +135,21 @@ def cart_page():
 @login_required
 def resetpwd_page():
     return render_template("reset_pwd.html")
+
+@app.route("/user_deleted")
+@login_required
+def user_deleted():
+    return render_template("user_deleted.html")
+
+@app.route("/admin-panel", methods=['GET', 'POST'])
+@login_required
+def adminpanel_page():
+    users= User.query.all()
+    users.remove(current_user) 
+    user_ID = request.form.get('delete')
+    if user_ID:
+                db.session.delete(User.query.filter_by(id=user_ID).first())
+                db.session.commit()
+                return redirect(url_for('user_deleted'))
+    return render_template("admin-panel.html", users=users)
     

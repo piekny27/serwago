@@ -1,99 +1,141 @@
 body {
-	font-family: 'Share Tech Mono', monospace;
-
-	font-size: 14px;
-	background-color: rgb(255, 255, 255)
-
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    background-color: rgb(255, 255, 255)
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.filler{
-	height: 50%;
-	width: 50%;
-	float: left;
-
-
+.filler {
+    height: 50%;
+    width: 50%;
+    float: left;
 }
+
 input,
 .btn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  margin: 5px 0;
-  opacity: 0.85;
-  display: inline-block;
-  font-size: 17px;
-  line-height: 20px;
-  text-decoration: none;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
 }
 
 input:hover,
 .btn:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 input[type=submit] {
-  background-color: #36b03c;
-  color: white;
-  cursor: pointer;
+    background-color: #36b03c;
+    color: white;
+    cursor: pointer;
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
-.wrapper{
-  margin :0 auto;
-  padding-bottom: 25px;
-  padding: 10px;
-  width: 504px;
-  border: none;
-  opacity: 0.85;
-  border-radius: 4px;
-  color: #ffffff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
+.wrapper {
+    margin: 0 auto;
+    padding-bottom: 25px;
+    padding: 10px;
+    width: 504px;
+    border: none;
+    opacity: 0.85;
+    border-radius: 4px;
+    color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 
-
-.header{
-	text-align: center;
-	color: white;
+.header {
+    text-align: center;
+    color: white;
 }
-
-
 
 .bottom-container {
-  text-align: center;
-  background-color: #666;
-  border-radius: 0px 0px 4px 4px;
+    text-align: center;
+    background-color: #666;
+    border-radius: 0px 0px 4px 4px;
 }
-
 
 input[type=text]:focus,
-input[type=password]:focus
-{
-	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
-	border: 2px solid #a5cda5;
-	background-color: #e9f3e9;
-	color: #428c42;
+input[type=password]:focus {
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+    -moz-box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+    box-shadow: 0px 0px 10px 2px rgba(204, 204, 204, 0.9);
+    border: 2px solid #a5cda5;
+    background-color: #e9f3e9;
+    color: #428c42;
 }
 
-.form-group{
-  padding-top: 2px;
+.form-group {
+    padding-top: 2px;
 }
 
-.wrapper{
-  border: 2px solid #333;
-  border-radius: 14px;
-  background-color: #333;
+.wrapper {
+    border: 2px solid #333;
+    border-radius: 14px;
+    background-color: #333;
+}
+
+.politykaPrywatnosci {
+    text-align: justify;
+    padding-top: 25px;
+}
+
+.header-text {
+    text-align: center;
+}
+
+#delete-account:hover {
+    opacity: 1;
+}
+
+#delete-account[type=submit] {
+    background-color: #b03636;
+    color: white;
+    cursor: pointer;
+}
+
+#delete-account {
+    width: 50%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 10px;
+    text-decoration: none;
+}
+
+#delete[type=submit] {
+    background-color: #b03636;
+    color: white;
+    cursor: pointer;
+}
+
+#delete {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    margin: 2px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 25px;
+    text-decoration: none;
 }
