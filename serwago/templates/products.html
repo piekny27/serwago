@@ -31,6 +31,7 @@
                 <a class="nav-link" href="/products">Products</a>
                 {% if not current_user.is_authenticated %}
                 <a class="nav-link" href="/login">Log in</a>
+                <a class="nav-link" href="/privacypolicy">Privacy policy</a>
                 {% endif %} 
                 {% if current_user.is_authenticated %}
                 <a class="nav-link" href="/account">Account</a> 
