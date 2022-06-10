@@ -21,7 +21,6 @@ class DBGenerator():
         self.genUsers()
         self.genRodzaje()
         self.genTowary()
-        self.genKoszyk()
         self.genKupon()
         self.genCPU()
         self.genGPU()
@@ -90,14 +89,6 @@ class DBGenerator():
             self.towary.append(new_Towar)
             inc+=1
 
-    def genKoszyk(self):
-        num = random.randint(0, 10)
-        for koszyk in range(num):
-            num2 = random.randint(0, 10)
-            for towar in range(num2):
-                num3 = random.randint(1, 8)
-                self.db.session.add(Koszyk(id_towar=num3 ))
-                self.db.session.commit()
 
 
     def genKupon(self):

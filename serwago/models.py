@@ -87,15 +87,20 @@ class UserProfile(db.Model):
     zip_code = db.Column(db.Integer)
     user=db.relationship('User', backref=db.backref("profiles"))
     
+cart_id = db.Table('cart',
+    db.Column('towar_id', db.Integer, db.ForeignKey('towar.id'), primary_key=True),
+    db.Column('koszyk_id', db.Integer, db.ForeignKey('koszyk.id'), primary_key=True)
+)
 
     
 class Koszyk (db.Model):
     __tablename__="koszyk"
     id = db.Column(db.Integer, nullable=False, primary_key= True)
-    id_towar = db.Column(db.Integer, db.ForeignKey("towar.id"))
-    towar=db.relationship('Towar', backref=db.backref('koszyk'))
     id_kupon=db.Column(db.Integer, db.ForeignKey("kupon.id"))
     kupon=db.relationship('Kupon', backref=db.backref('koszyk'))
+    towary = db.relationship('Towar', secondary=cart_id, lazy='dynamic',
+        backref=db.backref('towar', lazy=True))
+
 
 
 
