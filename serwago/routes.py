@@ -1,7 +1,7 @@
 from importlib.resources import path
 from unicodedata import name
 from flask import redirect, render_template, url_for, flash, request 
-from serwago.models import DBConnection, User, UserProfile, Towar
+from serwago.models import DBConnection, User, UserProfile, Towar, Koszyk
 from flask_login import login_user, logout_user, login_required, current_user
 from serwago import app
 from serwago.forms import LoginForm, RegisterForm, ProfileForm, CartForm, ProductForm
@@ -127,8 +127,15 @@ def cart_page():
     if current_user.is_authenticated:
         cart_form = CartForm()
         product_form = ProductForm(name="Olek",qty=10,total=3,price=2.50)
-        cart_form.products.append_entry(CartForm())
-    return render_template("cart.html") 
+        koszyk=Koszyk()
+        db.session.add(koszyk)
+        db.session.commit()
+        current_user.cart.koszyk_id=koszyk.id
+        current_user.cart.towar_id=3
+        current_user.cart.towar_id=4
+        db.session.commit()
+        aaaaa=current_user.cart
+    return render_template("cart.html", product=aaaaa) 
 
 
 @app.route("/reset_pwd")

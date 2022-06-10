@@ -48,34 +48,34 @@
                                             <table class="table table-borderless">
                                                 <thead>
                                                     <tr>
+                                                        
                                                         <th scope="col">#</th>
                                                         <th scope="col">Action</th>
                                                         <th scope="col">Product</th>
                                                         <th id="qty" scope="col">Qty</th>
                                                         <th scope="col">Price</th>
+                                                        
                                                         <th scope="col" class="text-right">Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% if current_user.is_authenticated %}
-                                                    {% set count = namespace(value=1) %}
-                                                    {% for product in form.products %}
+                                                    {% for cart in aaaaa %}
                                                     <tr>
-                                                        <th scope="row">{{count.value}}</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td>{{product.form.name.object_data.data}}</td>
+                                                        
+                                                        <th scope="row"><th>
+                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a>{{current_user.cart.towar_id}}</td>
+                                                        <td></td>
                                                         <td>
                                                             <div class="form-group mb-0">
-                                                                {{ product.form.qty(class="form-control", value=product.form.qty.object_data.data) }}
+                                                                
                                                             </div>
                                                         </td>
-                                                        <td>{{product.data['price'].data}}</td>
+                                                        <td></td>
                                                         <!-- wymnoz pan mi to i daj do total -->
-                                                        <td class="text-right">{{product.form.total.object_data.data}}</td>
+                                                        <td class="text-right"></td>
+                                                        
                                                     </tr>
-                                                    {% set count.value = count.value + 1 %}
                                                     {% endfor %}
-                                                    {% endif %}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -87,7 +87,7 @@
                                                     <form>
                                                         <div class="form-group">
                                                             <div class="input-group">
-                                                                {{ form.coupon_code( placeholder="Coupon Code", class="form-control") }}
+                                                               
                                                                 <div class="input-group-append">
                                                                     <button id="apply_coupon" class="input-group-text" type="submit" id="button-addonTags" value="apply">Apply</button>
                                                                 </div>
@@ -95,7 +95,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="specialNotes">Special Note for this order:</label>
-                                                            {{ form.note_msg( placeholder="Message here", class="form-control", id="specialNotes", rows="3") }}
+                                                           
                                                         </div>
                                                     </form>
                                                 </div>
@@ -106,19 +106,19 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>Sub Total :</td>
-                                                                <td>{{form.sub_total}}</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Shipping :</td>
-                                                                <td>{{form.shipping}}</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Tax(18%) :</td>
-                                                                <td>{{form.tax}}</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="f-w-7 font-18"><h4>Amount :</h4></td>
-                                                                <td class="f-w-7 font-18"><h4>{{form.amount}}</h4></td>
+                                                                <td class="f-w-7 font-18"><h4></h4></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
